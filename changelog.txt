@@ -1,0 +1,28 @@
+﻿// Version 2.0 nightly changes:
+- Migrated to .Net 5.0
+- Updated DSharp+ to version 4.0.1
+- Updated TwitchLib API to version 3.2.3
+- Updated Youtube Data API v3 to version 1.52.0.2343
+- Updated event handling since DSharp+ v4.0.0-nightly-00738
+- Updated logging since DSharp+ v4.0.0-nightly-00720
+- Migrated from Newtonsoft.Json to System.Text.Json
+- Modified logchannels algorithm
+- Fixed custom help formatter
+- Fixed custom statuses
+- Fixed math commands
+- Fixed runpoll command
+- Fixed VoiceNext connection
+- Fixed VoiceNext audio files playback
+- Added voice commands: play, playrandom, pause, resume
+- Cleaned up VoiceCommands code
+- Deleted hardcoded twitch and youtube tokens
+- Twitch and Youtube API keys are parsed from config now
+- Added OS description to bot status
+- Reorganized repo
+- Other minor fixes and cleanups
+
+TODO:
+- optimization and refactoring
+
+Known issues:
+- voice resume command does not resume playback

@@ -1,0 +1,87 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+    <Authors>thefullarcticfox_</Authors>
+    <Product>leetbot_night</Product>
+    <PackageId>leetbot_night</PackageId>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright></Copyright>
+    <Company>arcticfox/dev_</Company>
+    <Platforms>AnyCPU;x64;x86</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutputPath>bin\Debug\x64\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <OutputPath>bin\Debug\x86\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutputPath>bin\Release\x86\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutputPath>bin\Release\x64\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\Release\Any\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\Debug\Any\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="%24tf\**" />
+    <Compile Remove="Properties\PublishProfiles\**" />
+    <EmbeddedResource Remove="%24tf\**" />
+    <EmbeddedResource Remove="Properties\PublishProfiles\**" />
+    <None Remove="%24tf\**" />
+    <None Remove="Properties\PublishProfiles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DSharpPlus" Version="4.0.1" />
+    <PackageReference Include="DSharpPlus.CommandsNext" Version="4.0.1" />
+    <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.1" />
+    <PackageReference Include="DSharpPlus.Lavalink" Version="4.0.1" />
+    <PackageReference Include="DSharpPlus.VoiceNext" Version="4.0.1" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.52.0.2343" />
+    <PackageReference Include="TwitchLib.Api" Version="3.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="changelog.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <ContentWithTargetPath Include="Config\config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>config.json</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Config\logchannels.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>logchannels.txt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Config\twitchchannels.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>twitchchannels.txt</TargetPath>
+    </ContentWithTargetPath>
+    <ContentWithTargetPath Include="Config\youtubechannels.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <TargetPath>youtubechannels.txt</TargetPath>
+    </ContentWithTargetPath>
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="&quot;C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(ProjectDir)Properties\AssemblyInfo.tt&quot;" />
+  </Target>
+
+</Project>
