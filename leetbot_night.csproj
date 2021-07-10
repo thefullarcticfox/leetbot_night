@@ -60,4 +60,10 @@
     <Exec Command=" &quot;C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(ProjectDir)Properties\AssemblyInfo.tt&quot; " />
   </Target>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="BuildDateAttribute">
+      <_Parameter1>$([System.DateTime]::UtcNow.ToString("yyyyMMddHHmmss"))</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
 </Project>
