@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Reflection;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -190,11 +190,18 @@ namespace leetbot_night.Commands
 				await using (FileStream fs = File.OpenRead("changelog.txt"))
 				using (var sr = new StreamReader(fs, new UTF8Encoding(true)))
 					changelog = await sr.ReadToEndAsync();
-				await ctx.Channel.SendMessageAsync($"Current version {BotMain.BotVersion}\n" +
-												   $"```{changelog}```");
+				await ctx.Channel.SendMessageAsync($"Current version {BotMain.BotVersion}\n```{changelog}```");
 			}
-			string twitchlibversion = FileVersionInfo.GetVersionInfo("TwitchLib.Api.Core.dll").ProductVersion;
-			string youtubeapiversion = FileVersionInfo.GetVersionInfo("Google.Apis.YouTube.v3.dll").FileVersion;
+			var twitchlibversion = Assembly
+				.GetAssembly(typeof(TwitchLib.Api.TwitchAPI))?
+				.GetName()
+				.Version?.ToString();
+			var youtubeapiversion = Assembly
+				.GetAssembly(typeof(Google.Apis.YouTube.v3.YouTubeService))?
+				.GetName()
+				.Version?.ToString();
+			// FileVersionInfo.GetVersionInfo("TwitchLib.Api.Core.dll").ProductVersion;
+			// FileVersionInfo.GetVersionInfo("Google.Apis.YouTube.v3.dll").FileVersion;
 			var embed = new DiscordEmbedBuilder
 			{
 				Color = new DiscordColor(0x000000),

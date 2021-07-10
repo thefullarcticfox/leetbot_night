@@ -76,12 +76,17 @@ namespace leetbot_night
 		private async Task MainAsync()
 		{
 			// getting versions and assembly info
-			BotVersion = FileVersionInfo.GetVersionInfo(Assembly.
-				GetExecutingAssembly().Location).ProductVersion;
-			BotConfig = Assembly.GetExecutingAssembly().GetCustomAttributes(true).
-				OfType<AssemblyConfigurationAttribute>().FirstOrDefault()?.Configuration;
-			BotArch = Assembly.GetExecutingAssembly().GetName().
-				ProcessorArchitecture.ToString().ToLower();
+			BotVersion = FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).ProductVersion;
+			BotConfig = Assembly.GetExecutingAssembly()
+								.GetCustomAttributes(true)
+								.OfType<AssemblyConfigurationAttribute>()
+								.FirstOrDefault()?
+								.Configuration;
+			BotArch = Assembly.GetExecutingAssembly()
+							  .GetName()
+							  .ProcessorArchitecture
+							  .ToString()
+							  .ToLower();
 
 			// init log channels
 			_logChannels = new List<DiscordChannel>();

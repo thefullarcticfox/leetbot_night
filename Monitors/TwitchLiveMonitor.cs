@@ -68,7 +68,8 @@ namespace leetbot_night.Monitors
 				_api.Settings.ClientId = _apiClientId;
 				_api.Settings.Secret = _apiSecret;
 				_tlm = new LiveStreamMonitorService(_api, checkInterval);
-				GetTwitchChannelsAsync();       // get twitch channels to list
+				if (!GetTwitchChannelsAsync()) // get twitch channels to list
+					return;
 				_tlm.SetChannelsByName(_twitchChannelList);
 				_tlm.OnServiceStarted += TLM_OnServiceStarted;
 				_tlm.OnServiceStopped += TLM_OnServiceStopped;
@@ -80,8 +81,8 @@ namespace leetbot_night.Monitors
 			}
 			catch (Exception e)
 			{
-				_discordClient.Logger.LogError("[TwitchLiveMonitor] " +
-					$"{e.Message} Restarting in 1 minute.");
+				_discordClient.Logger
+					.LogError($"[TwitchLiveMonitor] {e.Message} Restarting in 1 minute.");
 				await Task.Delay(60 * 1000);
 				await ConfigTlmAsync(checkInterval);
 			}
@@ -129,16 +130,17 @@ namespace leetbot_night.Monitors
 			Task.Run(() => SendOfflineNotifAsync(e.Channel));
 		}
 
-		private void GetTwitchChannelsAsync()
+		private bool GetTwitchChannelsAsync()
 		{
 			_twitchChannelList = FileHandler.GetChannelListFromFile(_discordClient, "twitchchannels.txt");
 			_lastTwChWrite = File.GetLastWriteTime("twitchchannels.txt");            // last write time for twitch channels
 
 			if (_twitchChannelList.Any())
-				return;
+				return true;
 			_discordClient.Logger.LogWarning("[TwitchLiveMonitor] " +
 				"No channels to monitor. Check twitchchannels.txt file or add channel " +
-				"using !admin logging addtwitchchannel <channelname>.");
+				"using !admin logging addtwitchchannel <channelname> and restart the bot.");
+			return false;
 		}
 
 		private async Task SendOnlineNotifAsync(string channel, string title)

@@ -21,7 +21,7 @@ namespace leetbot_night.Services
 		{
 			try
 			{
-				StreamWriter? sw = File.CreateText(filename);
+				StreamWriter sw = File.CreateText(filename);
 				await sw.WriteAsync(textinput);
 				sw.Close();
 			}
@@ -39,7 +39,7 @@ namespace leetbot_night.Services
 			string result;
 			try
 			{
-				await using (FileStream? fs = File.OpenRead("config.json"))
+				await using (FileStream fs = File.OpenRead("config.json"))
 				using (var sr = new StreamReader(fs, new UTF8Encoding(false)))
 					result = await sr.ReadToEndAsync();
 				if (result.Length == 0)
@@ -112,7 +112,7 @@ namespace leetbot_night.Services
 			IEnumerable<FileInfo> rgFiles = dir.GetFiles("*.*")
 				.Where(f => extensions.Contains(f.Extension.ToLower()));
 			var r = new Random();
-			List<FileInfo>? fileInfos = rgFiles.ToList();
+			List<FileInfo> fileInfos = rgFiles.ToList();
 			if (fileInfos.Any())
 				file = fileInfos.ElementAt(r.Next(0, fileInfos.Count)).FullName;
 			return file;
@@ -124,7 +124,7 @@ namespace leetbot_night.Services
 			if (string.IsNullOrEmpty(path))
 				return imgcount;
 			var dir = new DirectoryInfo(path);
-			IEnumerable<FileInfo>? rgFiles = dir.GetFiles("*.*")
+			IEnumerable<FileInfo> rgFiles = dir.GetFiles("*.*")
 				.Where(f => extensions.Contains(f.Extension.ToLower()));
 			imgcount = rgFiles.Count();
 			return imgcount;
@@ -139,7 +139,7 @@ namespace leetbot_night.Services
 			{
 				discord.Logger.LogWarning("[FileHandler] " +
 					$"Directory {path} not found. Creating...");
-				DirectoryInfo? dir = Directory.CreateDirectory(path);
+				DirectoryInfo dir = Directory.CreateDirectory(path);
 				if (dir.Exists)
 					discord.Logger.LogInformation("[FileHandler] " +
 						$"Successfully created {dir.FullName} directory.");

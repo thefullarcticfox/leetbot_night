@@ -30,7 +30,7 @@
     <PackageReference Include="DSharpPlus.Interactivity" Version="4.0.1" />
     <PackageReference Include="DSharpPlus.Lavalink" Version="4.0.1" />
     <PackageReference Include="DSharpPlus.VoiceNext" Version="4.0.1" />
-    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.52.0.2343" />
+    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.52.0.2378" />
     <PackageReference Include="TwitchLib.Api" Version="3.2.3" />
   </ItemGroup>
 
@@ -56,8 +56,7 @@
     </ContentWithTargetPath>
   </ItemGroup>
 
-  <Target Name="BeforeBuildUpdateVersionWithTextTransformOnWindowsIfExists" BeforeTargets="PreBuildEvent"
-          Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' And Exists('C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe') ">
+  <Target Name="BeforeBuildUpdateVersionWithTextTransformOnWindowsIfExists" BeforeTargets="PreBuildEvent" Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' And Exists('C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe') ">
     <Exec Command=" &quot;C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(ProjectDir)Properties\AssemblyInfo.tt&quot; " />
   </Target>
 
