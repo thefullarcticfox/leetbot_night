@@ -59,29 +59,30 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="changelog.txt">
+    <None Update="changelog.txt" Condition="Exists('changelog.txt')">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <ContentWithTargetPath Include="Config\config.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <ContentWithTargetPath Include="Config\config.json" Condition="Exists('Config\config.json')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>config.json</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="Config\logchannels.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <ContentWithTargetPath Include="Config\logchannels.txt" Condition="Exists('Config\logchannels.txt')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>logchannels.txt</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="Config\twitchchannels.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <ContentWithTargetPath Include="Config\twitchchannels.txt" Condition="Exists('Config\twitchchannels.txt')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>twitchchannels.txt</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="Config\youtubechannels.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <ContentWithTargetPath Include="Config\youtubechannels.txt" Condition="Exists('Config\youtubechannels.txt')">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>youtubechannels.txt</TargetPath>
     </ContentWithTargetPath>
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="&quot;C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(ProjectDir)Properties\AssemblyInfo.tt&quot;" />
+  <Target Name="BeforeBuildUpdateVersionWithTextTransformOnWindowsIfExists" BeforeTargets="PreBuildEvent"
+          Condition=" '$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' And Exists('C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe') ">
+    <Exec Command=" &quot;C:\VisualStudio\2019\Community\Common7\IDE\TextTransform.exe&quot; -a !!BuildConfiguration!$(Configuration) &quot;$(ProjectDir)Properties\AssemblyInfo.tt&quot; " />
   </Target>
 
 </Project>

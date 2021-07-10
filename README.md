@@ -17,4 +17,4 @@ this is just my little discord bot which served as a playground with async tasks
 - .Net 5.0 SDK
 > also: some nerves to get through my bad code
 
-> this project also builds on linux and darwin but to build you need to remove target PreBuild because there's no TextTransform.exe on unix systems
+> this project also builds on linux and darwin
