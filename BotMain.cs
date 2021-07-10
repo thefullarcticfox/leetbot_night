@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -60,6 +61,7 @@ namespace leetbot_night
 		public static void Main()
 		{
 			Console.OutputEncoding = Encoding.UTF8;
+			CultureInfo.CurrentCulture = new CultureInfo("en-GB", false);
 			var bot = new BotMain();
 			try
 			{
