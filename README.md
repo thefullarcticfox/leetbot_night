@@ -1,4 +1,8 @@
 # leetbot_night
+[![Linux](https://github.com/thefullarcticfox/leetbot_night/actions/workflows/dotnet-linux.yml/badge.svg)](https://github.com/thefullarcticfox/leetbot_night/actions/workflows/dotnet-linux.yml)
+[![macOS](https://github.com/thefullarcticfox/leetbot_night/actions/workflows/dotnet-macos.yml/badge.svg)](https://github.com/thefullarcticfox/leetbot_night/actions/workflows/dotnet-macos.yml)
+[![Windows](https://github.com/thefullarcticfox/leetbot_night/actions/workflows/dotnet-windows.yml/badge.svg)](https://github.com/thefullarcticfox/leetbot_night/actions/workflows/dotnet-windows.yml)
+
 this is just my little discord bot which served as a playground with async tasks, cryptography (AES/RSA) and other C#/.NET features back in 2019-2020 when i developed it
 
 ### uses
@@ -17,4 +21,4 @@ this is just my little discord bot which served as a playground with async tasks
 - .Net 5.0 SDK
 > also: some nerves to get through my bad code
 
-> this project also builds on linux and darwin
+> this project also builds on linux and macos
