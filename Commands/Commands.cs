@@ -207,6 +207,7 @@ namespace leetbot_night.Commands
                 Color = new DiscordColor(0x000000),
                 Description = $"**bot version** {BotMain.InformationalVersion}\n"
                             + $"**build time**  {BotMain.BuildDate} UTC\n"
+                            + $"**host OS**  {BotMain.HostOsInfo}\n"
                             + "\n**Uses:**\n"
                             + $"DSharp+ v{ctx.Client.VersionString}\n"
                             + $"TwitchLib v{twitchlibversion}\n"

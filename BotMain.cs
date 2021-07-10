@@ -32,10 +32,11 @@ namespace leetbot_night
     public class BotMain
     {
         // Assembly info strings
+        public static DateTime          BuildDate { get; private set; }
         public static string            Version { get; private set; }
         public static string            InformationalVersion { get; private set; }
         public static string            RuntimeInfo { get; private set; }
-        public static DateTime          BuildDate { get; private set; }
+        public static string            HostOsInfo { get; private set; }
 
         // DSharpPlus stuff
         private DiscordClient			_discord;
@@ -220,19 +221,10 @@ namespace leetbot_night
         {
             client.Logger.LogInformation($"Client v{Version} {RuntimeInfo} ready.");
 
-            // cut OS Description string
-            string osString = RuntimeInformation.OSDescription;
-            if (osString.Length > 32)
-                while (osString.Contains("0123456789".ToCharArray()) &&
-                       osString.LastIndexOfAny("0123456789".ToCharArray()) > 32)
-                    osString = osString.Remove(osString.LastIndexOfAny("0123456789".ToCharArray()));
-            if (osString.Contains("0123456789".ToCharArray()))
-                osString = osString.Substring(0, osString.LastIndexOfAny("0123456789".ToCharArray()) + 1);
-
             var game = new DiscordActivity
             {
                 ActivityType = ActivityType.Playing,
-                Name = $"v{Version} {RuntimeInfo} on {osString}"
+                Name = $"v{Version} {RuntimeInfo} on {HostOsInfo}"
             };
             _discord.UpdateStatusAsync(game, UserStatus.Online);
             return Task.CompletedTask;
@@ -459,6 +451,15 @@ namespace leetbot_night
             BuildDate = assembly
                 .GetCustomAttribute<BuildDateAttribute>()?
                 .DateTime ?? default;
+
+            // cut OS Description string
+            HostOsInfo = RuntimeInformation.OSDescription;
+            if (HostOsInfo.Length > 32)
+                while (HostOsInfo.Contains("0123456789".ToCharArray()) &&
+                       HostOsInfo.LastIndexOfAny("0123456789".ToCharArray()) > 32)
+                    HostOsInfo = HostOsInfo.Remove(HostOsInfo.LastIndexOfAny("0123456789".ToCharArray()));
+            if (HostOsInfo.Contains("0123456789".ToCharArray()))
+                HostOsInfo = HostOsInfo.Substring(0, HostOsInfo.LastIndexOfAny("0123456789".ToCharArray()) + 1);
         }
     }
 }

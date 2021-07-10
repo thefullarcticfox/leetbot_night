@@ -27,6 +27,6 @@ using System.Reflection;
 <#+
     int major = 2;
     int minor = 0;
-    int build = 780;
-    int revision = 127;
+    int build = 781;
+    int revision = 129;
 #>
